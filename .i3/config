@@ -136,6 +136,11 @@ mode "resize" {
 
 bindsym $mod+r                                          mode "resize"
 
+# cycling through workspaces
+bindsym $mod+y                                          border pixel 50
+bindsym $mod+u                                          border normal 0
+bindsym $mod+i                                          border none
+
 # workspace bar
 bar {
         status_command i3blocks
