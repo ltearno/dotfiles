@@ -137,9 +137,11 @@ mode "resize" {
 bindsym $mod+r                                          mode "resize"
 
 # cycling through workspaces
-bindsym $mod+y                                          border pixel 50
+bindsym $mod+y                                          border pixel 10
 bindsym $mod+u                                          border normal 0
 bindsym $mod+i                                          border none
+
+for_window [class="^.*"] border pixel 10
 
 # workspace bar
 bar {
@@ -162,6 +164,7 @@ bar {
 
 # Color scheme (Gruvbox dark)
 set $color_normal_white                                 #a89984
+set $color_normal_white                                 #a8a8a8
 set $color_bright_white                                 #ebdbb2
 set $color_normal_gray                                  #222222
 set $color_bright_gray                                  #3c3836
