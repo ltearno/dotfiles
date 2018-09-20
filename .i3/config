@@ -82,9 +82,9 @@ bindsym $mod+Shift+r                                    restart
 bindsym $mod+Shift+e                                    exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # workspaces
-set $workspaceGeneral                                   "1: General"
-set $workspaceCode                                      "2: Code"
-set $workspaceWeb                                       "3: Web"
+set $workspaceGeneral                                   "1: Web"
+set $workspaceCode                                      "2: Terminals"
+set $workspaceWeb                                       "3: Code"
 
 exec i3-msg 'rename workspace to "$workspaceGeneral"'
 exec i3-msg 'workspace "$workspaceGeneral"'
@@ -136,17 +136,43 @@ mode "resize" {
 
 bindsym $mod+r                                          mode "resize"
 
+# brightness
+#set $mode_brightness brightness
+
+#mode "$mode_brightness" {
+#bindsym XF86KbdBrightnessUp exec --no-startup-id ${HOME}/bin/backlight.sh -time 50 -inc 10
+#bindsym XF86KbdBrightnessDown exec --no-startup-id ${HOME}/bin/backlight.sh -time 50 -dec 10
+#    bindsym Shift+plus  exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -inc 1
+#    bindsym Shift+minus exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -dec 1
+
+#    bindsym 0     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 100
+#    bindsym 1     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 10
+#    bindsym 2     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 20
+#    bindsym 3     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 30
+#    bindsym 4     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 40
+#    bindsym 5     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 50
+#    bindsym 6     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 60
+#    bindsym 7     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 70
+#    bindsym 8     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 80
+#    bindsym 9     mode "default", exec --no-startup-id ${HOME}/scripts/backlight.sh -time 50 -set 90
+
+#    bindsym Return mode "default"
+#    bindsym Escape mode "default"
+#}
+
+#bindsym $mod+Shift+b mode "$mode_brightness"
+
 # cycling through workspaces
-bindsym $mod+y                                          border pixel 10
+bindsym $mod+y                                          border pixel 0
 bindsym $mod+u                                          border normal 0
 bindsym $mod+i                                          border none
 
-for_window [class="^.*"] border pixel 10
+for_window [class="^.*"] border normal 0
 
 # workspace bar
 bar {
         status_command 					i3blocks
-	position					top
+        position                                        top
 
         colors {
                 # Whole color settings
@@ -178,3 +204,6 @@ client.focused_inactive                                 $color_bright_gray     $
 client.unfocused                                        $color_normal_gray     $color_normal_gray     $color_normal_white    $color_unused   $color_normal_black
 client.urgent                                           $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused   $color_unused
 client.placeholder                                      $color_unused          $color_normal_black    $color_unused          $color_unused   $color_unused
+
+#bindsym $mod+g exec echo "swap_focus" | nc -N -U "$XDG_RUNTIME_DIR/i3/event-listener.sock"
+#exec --no-startup-id /home/arnaud/repos/persos/dotfiles/scripts/event-listener.py
