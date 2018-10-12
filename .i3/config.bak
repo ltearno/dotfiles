@@ -6,6 +6,9 @@
 # by the way, setting the brightness can be done like this
 # sudo sh -c 'echo 7500 > /sys/class/backlight/intel_backlight/brightness'
 
+exec xrandr --dpi 288
+exec xrandr --output eDP-1 --scale 1x1
+
 # screen lock
 set $LOCK_IMAGE $HOME/Téléchargements/Two-Factor_Image.png
 bindsym $mod+l exec i3lock -i $LOCK_IMAGE
@@ -18,9 +21,9 @@ exec --no-startup-id xinput --set-prop 14 313 -27, -27
 exec --no-startup-id sh ~/.fehbg
 
 # compton window compositor (effect...)
-#exec compton
+exec compton --backend glx --vsync opengl-swc
 
-font pango:                                             Taskbar, Cantarell 12
+font pango:                                             Taskbar, Cantarell 5
 
 set $mod                                                Mod4
 set $up                                                 Up
@@ -82,12 +85,12 @@ bindsym $mod+Shift+r                                    restart
 bindsym $mod+Shift+e                                    exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # workspaces
-set $workspaceGeneral                                   "1: Web"
-set $workspaceCode                                      "2: Terminals"
-set $workspaceWeb                                       "3: Code"
+#set $workspaceGeneral                                   "1: Web"
+#set $workspaceCode                                      "2: Terminals"
+#set $workspaceWeb                                       "3: Code"
 
-exec i3-msg 'rename workspace to "$workspaceGeneral"'
-exec i3-msg 'workspace "$workspaceGeneral"'
+#exec i3-msg 'rename workspace to "$workspaceGeneral"'
+#exec i3-msg 'workspace "$workspaceGeneral"'
 
 # workspace navigation
 workspace_auto_back_and_forth                           no
@@ -99,9 +102,9 @@ bindsym $mod+o                                          workspace prev
 bindsym $mod+p                                          workspace next
 
 # switch to workspace
-bindsym $mod+1                                          workspace $workspaceGeneral
-bindsym $mod+2                                          workspace $workspaceCode
-bindsym $mod+3                                          workspace $workspaceWeb
+bindsym $mod+1                                          workspace 1
+bindsym $mod+2                                          workspace 2
+bindsym $mod+3                                          workspace 3
 bindsym $mod+4                                          workspace 4
 bindsym $mod+5                                          workspace 5
 bindsym $mod+6                                          workspace 6
@@ -111,9 +114,9 @@ bindsym $mod+9                                          workspace 9
 bindsym $mod+0                                          workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1                                    move container to workspace $workspaceGeneral
-bindsym $mod+Shift+2                                    move container to workspace $workspaceCode
-bindsym $mod+Shift+3                                    move container to workspace $workspaceWeb
+bindsym $mod+Shift+1                                    move container to workspace 1
+bindsym $mod+Shift+2                                    move container to workspace 2
+bindsym $mod+Shift+3                                    move container to workspace 3
 bindsym $mod+Shift+4                                    move container to workspace 4
 bindsym $mod+Shift+5                                    move container to workspace 5
 bindsym $mod+Shift+6                                    move container to workspace 6
@@ -138,6 +141,9 @@ bindsym $mod+r                                          mode "resize"
 
 # brightness
 #set $mode_brightness brightness
+
+#bindsym XF86MonBrightnessUp exec --no-startup-id /home/arnaud/repos/idp/scripts/brightness up
+#bindsym XF86MonBrightnessDown exec --no-startup-id /home/arnaud/repos/idp/scripts/brightness down
 
 #mode "$mode_brightness" {
 #bindsym XF86KbdBrightnessUp exec --no-startup-id ${HOME}/bin/backlight.sh -time 50 -inc 10
@@ -171,7 +177,7 @@ for_window [class="^.*"] border normal 0
 
 # workspace bar
 bar {
-        status_command 					i3blocks
+        status_command                                  i3blocks
         position                                        top
 
         colors {
