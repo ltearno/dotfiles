@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#set -e
+
+for repo in `find ~/repos -type d -name .git`; do
+    cd $repo
+    
+    REPO_LOG=$(git --no-pager log --since='1week' --pretty='format:%h %ci %s')
+    if [[ $REPO_LOG != '' ]]
+    then
+        echo "==== ${repo} ===="
+        git --no-pager log --since='1week' --pretty='format:%h %ci %s'
+        echo ""
+        echo ""
+    fi
+done
