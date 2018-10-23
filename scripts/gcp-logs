@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#set -e
+
+PROJECT=$(gcloud config get-value project)
+SERVICE=$1
+SERVICE=authentication-referential-service
+SERVICE=authentication-broker-api-gateway
+
+echo "current project ${PROJECT}"
+echo "service ${SERVICE}"
+
+FORMAT='value(textPayload)'
+FORMAT='value(jsonPayload.payload.requestUri)'
+FORMAT='csv(jsonPayload.uid,jsonPayload.role,jsonPayload.payload.requestMethod,jsonPayload.payload.requestUri,jsonPayload.payload.statusCode)'
+#FORMAT='yaml'
+
+gcloud beta logging read 'resource.type="container" AND resource.labels.cluster_name="at-broker" AND resource.labels.namespace_id="default" AND logName="projects/'${PROJECT}'/logs/'${SERVICE}'"' --format=$FORMAT --freshness=1d
+#    split --separator='---'
+#    shyaml get-value jsonPayload.payload.message
+#    cut -d'---' | \

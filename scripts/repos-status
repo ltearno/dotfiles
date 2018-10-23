@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#set -e
+
+find ~/repos -type d -name .git -execdir repo-status \;

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+cd /sys/devices/system/cpu
+
+newSpeedTop=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_max_freq`
+newSpeedLow=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_min_freq`
+
+newSpeedLow=$newSpeedTop
+newSpeedLow=3000000
+
+echo Top speed : $newSpeedTop
+echo Low speed : $newSpeedLow
+
+for c in ./cpu[0-9]* ; do
+    echo "Setting frequencies for CPU $c"
+    echo $newSpeedTop > ${c}/cpufreq/scaling_max_freq
+    echo $newSpeedLow > ${c}/cpufreq/scaling_min_freq
+done
+
+# sets intel_pstate driver's parameters (don't know if it really works!)
+echo 70 > /sys/devices/system/cpu/intel_pstate/min_perf_pct

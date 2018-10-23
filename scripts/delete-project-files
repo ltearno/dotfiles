@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+echo "deleting project files"
+
+find ./ -name 'target' | xargs rm -rf {}
+find ./ -name '.project' | xargs rm -rf {}
+find ./ -name '.settings' | xargs rm -rf {}
+find ./ -name '.idea' | xargs rm -rf {}
+find ./ -name '.classpath' | xargs rm -rf {}
+find ./ -name '.factorypath' | xargs rm -rf {}
+find ./ -name '*.iml' | xargs rm -rf {}
+find ./ -name 'dependency-reduced-pom.xml' | xargs rm -rf {}
+
+echo "done"

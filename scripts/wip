@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+MESSAGE=$*
+
+red='\e[1;31m'
+blue='\e[1;34m'
+endColor='\e[0m'
+
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ ${BRANCH} == 'master' ]]
+then
+    echo -e "${red}[ERROR] cannot wip on master my dear !${endColor}"
+else
+    git add $(git rev-parse --show-toplevel)
+    if [[ ${MESSAGE} == "" ]]
+    then
+        git commit -m "wip"
+    else
+        echo -e "message for the wip : ${blue}${MESSAGE}${endColor}"
+        git commit -m "wip ${MESSAGE}"
+    fi
+    git push
+fi

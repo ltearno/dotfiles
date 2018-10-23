@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+cd /sys/devices/system/cpu
+
+newSpeedTop=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_max_freq`
+newSpeedLow=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_min_freq`
+
+newSpeedTop=$newSpeedLow
+
+echo Top speed : $newSpeedTop
+echo Low speed : $newSpeedLow
+
+for c in ./cpu[0-9]* ; do
+    echo "Setting frequencies for CPU $c"
+    echo $newSpeedTop > ${c}/cpufreq/scaling_max_freq
+    echo $newSpeedLow > ${c}/cpufreq/scaling_min_freq
+done

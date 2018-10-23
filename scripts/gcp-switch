@@ -1,0 +1,66 @@
+#!/bin/bash
+
+#set -e
+
+PROJECT_HINT=$1
+CLUSTER_ID=$2
+
+
+if [[ -z ${PROJECT_HINT} ]]
+then
+    echo "usage $(basename "$0") PROJECT_HINT [CLUSTER_ID]"
+    echo ""
+    echo "usable project list"
+    ls ~/gcp-keys | sed -e "s/.json//g" | sed -e 's/\s\+/\n/g'
+    exit -1
+fi
+
+echo "searching known project like '${PROJECT_HINT}'"
+
+POSSIBLE_PROJECTS=$(ls ~/gcp-keys | grep "${PROJECT_HINT}")
+POSSIBLE_PROJECTS_COUNT=$(ls ~/gcp-keys | grep "${PROJECT_HINT}" | wc -l)
+
+if [[ "0" -eq $POSSIBLE_PROJECTS_COUNT ]]
+then
+    echo "no project like ${PROJECT_HINT}"
+    ls ~/gcp-keys
+    exit 1
+fi
+
+if [[ "1" -eq $POSSIBLE_PROJECTS_COUNT ]]
+then
+    PROJECT_ID=$(echo ${POSSIBLE_PROJECTS} | sed -e "s/.json//g")
+    echo "selecting project ${PROJECT_ID}"
+else
+    echo "ambiguous project hint ${PROJECT_HINT} between those ${POSSIBLE_PROJECTS_COUNT} projects:"
+    ls ~/gcp-keys | sed -e "s/.json//g" | sed -e 's/\s\+/\n/g' | grep ${PROJECT_HINT}
+    exit -1
+fi
+
+gcloud auth activate-service-account --key-file ~/gcp-keys/${PROJECT_ID}.json
+gcloud config set project ${PROJECT_ID}
+#gcloud config set zone europe-west1-b
+
+REGION=europe-west1-b
+if [[ "tcife2-idp-qual-ppcharging" == ${PROJECT_ID} ]]
+then
+    REGION=europe-west2-b
+fi
+if [[ "tceife2-idp-dev-oneatlasdata" == ${PROJECT_ID} ]]
+then
+    REGION=europe-west2-a
+fi
+
+if [[ -z ${CLUSTER_ID} ]]
+then
+    echo "no cluster specified, choose one"
+    gcloud container clusters list
+else
+    echo "getting credentials for cluster ${CLUSTER_ID} on project ${PROJECT_ID}"
+    gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${REGION} --project ${PROJECT_ID}
+fi
+
+echo ""
+echo "CURRENT PROJECT : $(gcloud config get-value project)"
+gcloud config configurations list
+kubectl get pods
