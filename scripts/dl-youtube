@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+red='\e[1;31m'
+blue='\e[1;34m'
+endColor='\e[0m'
+
+DOWNLOAD_LIST=~/download-list.txt
+
+cd ~/Musique
+
+if [[ -f ${DOWNLOAD_LIST} ]]
+then
+    echo "OK, processing download"
+
+    while IFS='' read -r line || [[ -n "$line" ]]; do
+        echo "Processing: $line"
+        youtube-dl -x --audio-format mp3 --audio-quality 0 $line
+    done < ${DOWNLOAD_LIST}
+else
+    echo "No download list found ! write in ${DOWNLOAD_LIST}"
+fi

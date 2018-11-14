@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while read -r line; do
+    echo $(echo "$line" | jq .time) $(echo "$line" | jq -r .corr) $(echo "$line" | jq -r '.payload.message')
+done

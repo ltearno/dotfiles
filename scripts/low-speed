@@ -7,7 +7,7 @@ cd /sys/devices/system/cpu
 newSpeedTop=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_max_freq`
 newSpeedLow=`awk '{print $1}' ./cpu0/cpufreq/cpuinfo_min_freq`
 
-newSpeedTop=$newSpeedLow
+#newSpeedTop=$newSpeedLow
 
 echo Top speed : $newSpeedTop
 echo Low speed : $newSpeedLow

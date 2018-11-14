@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -e
+
+color='\e[1;33m'
+endColor='\e[0m'
+
+TOKEN=$(xclip -o)
+
+extractTokenPart() {
+    token=$1
+    partIndex=$2
+
+    PART=$(echo -n ${token} | cut -d "." -f ${partIndex} | tr '_-' '/+')
+    
+    LENGTH=$((${#PART} % 4))
+    if [ $LENGTH -eq 2 ]; then PART="$PART"'=='
+    elif [ $LENGTH -eq 3 ]; then PART="$PART"'=' 
+    fi
+
+    echo ${PART}
+}
+
+printTokenPart() {
+    PART_NAME=$1
+    PART=$2
+
+    echo -e "${color}${PART_NAME}${endColor}"
+    echo ${PART} | base64 -d | jq .
+}
+
+echo -e "${color}Input token${endColor} "
+echo $(echo ${TOKEN} | cut -c1-15) "..." $(echo ${TOKEN: -15})
+echo ""
+
+printTokenPart Header $(extractTokenPart $TOKEN 1)
+echo ""
+
+TOKEN_BODY_PART=$(extractTokenPart $TOKEN 2)
+printTokenPart Body $TOKEN_BODY_PART
+echo ""
+
+echo -e "${color}Signature${endColor}"
+echo $(extractTokenPart $TOKEN 3)
+
+echo ""
+echo -e "${color}Principal informations${endColor}"
+echo ""
+DECODED_TOKEN=$(echo $TOKEN_BODY_PART | base64 -d)
+echo -e "   ${color}UUID:${endColor}          $(echo $DECODED_TOKEN | jq .uuid)"
+echo -e "   ${color}SUID:${endColor}          $(echo $DECODED_TOKEN | jq .suid)"
+echo -e "   ${color}Service group:${endColor} $(echo $DECODED_TOKEN | jq .aud)"
+echo -e "   ${color}Roles:${endColor}         $(echo $DECODED_TOKEN | jq -r .role)"

@@ -50,6 +50,10 @@ if [[ "tceife2-idp-dev-oneatlasdata" == ${PROJECT_ID} ]]
 then
     REGION=europe-west2-a
 fi
+if [[ "d-idp-playground" == ${PROJECT_ID} ]]
+then
+    REGION=europe-west1-b
+fi
 
 if [[ -z ${CLUSTER_ID} ]]
 then
