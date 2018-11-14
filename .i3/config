@@ -6,7 +6,7 @@
 # by the way, setting the brightness can be done like this
 # sudo sh -c 'echo 7500 > /sys/class/backlight/intel_backlight/brightness'
 
-exec xrandr --output eDP-1 --scale 1x1 --dpi 276.05
+exec --no-startup-id xrandr --output eDP-1 --scale 1x1 --dpi 276.05
 
 exec --no-startup-id blueman-manager
 exec --no-startup-id indicator-cpufreq
@@ -180,7 +180,7 @@ for_window [class="^.*"] border normal 1
 
 # workspace bar
 bar {
-        status_command                                  i3blocks -c ~/.config/i3/i3blocks
+        status_command                                  i3blocks -c ~/.i3/i3blocks
         position                                        top
 
         colors {
