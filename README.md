@@ -2,6 +2,13 @@
 
 My dot files for me
 
+# software list
+
+```bash
+sudo apt install \
+    jq
+```
+
 # install
 
 clone and
