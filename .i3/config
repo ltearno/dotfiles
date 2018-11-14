@@ -6,7 +6,7 @@
 # by the way, setting the brightness can be done like this
 # sudo sh -c 'echo 7500 > /sys/class/backlight/intel_backlight/brightness'
 
-exec --no-startup-id xrandr --output eDP-1 --scale 1x1 --dpi 276.05
+#exec --no-startup-id xrandr --output eDP-1 --scale 1x1 --dpi 276.05
 
 exec --no-startup-id blueman-manager
 exec --no-startup-id indicator-cpufreq
@@ -26,7 +26,7 @@ exec --no-startup-id sh ~/.fehbg
 #exec compton --backend glx --vsync opengl-swc
 #exec_always --no-startup-id "killall -q compton; compton --config ~/.config/i3/compton.conf"
 
-font pango:                                             Taskbar, Cantarell 5
+font pango:                                             Taskbar, Cantarell 12
 
 set $mod                                                Mod4
 set $up                                                 Up
