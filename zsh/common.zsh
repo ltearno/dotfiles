@@ -35,6 +35,7 @@ plugins=(
 )
 
 source /usr/share/google-cloud-sdk/completion.zsh.inc
+source <(kubectl completion zsh)
 source /usr/share/autojump/autojump.zsh
 
 alias k=kubectl
