@@ -6,7 +6,9 @@ My dot files for me
 
 ```bash
 sudo apt install \
-    jq
+    jq \
+    i3wm \
+    i3blocks
 ```
 
 # install
