@@ -8,6 +8,9 @@
 
 exec xrandr --output eDP-1 --scale 1x1 --dpi 276.05
 
+exec --no-startup-id blueman-manager
+exec --no-startup-id indicator-cpufreq
+
 # screen lock
 set $LOCK_IMAGE $HOME/Téléchargements/Two-Factor_Image.png
 bindsym $mod+l exec i3lock -i $LOCK_IMAGE
@@ -169,8 +172,8 @@ bindsym $mod+r                                          mode "resize"
 #bindsym $mod+Shift+b mode "$mode_brightness"
 
 # cycling through workspaces
-bindsym $mod+y                                          border pixel 5
-bindsym $mod+u                                          border normal 3
+bindsym $mod+y                                          border pixel 1
+bindsym $mod+u                                          border normal 1
 bindsym $mod+i                                          border none
 
 for_window [class="^.*"] border normal 1
