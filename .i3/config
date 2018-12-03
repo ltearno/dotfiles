@@ -10,6 +10,7 @@ exec --no-startup-id xrandr --output eDP-1 --scale 1x1 --dpi 276.05
 
 exec --no-startup-id blueman-manager
 exec --no-startup-id indicator-cpufreq
+exec --no-startup-id flameshot
 
 # screen lock
 set $LOCK_IMAGE $HOME/Téléchargements/Two-Factor_Image.png
@@ -172,11 +173,30 @@ bindsym $mod+r                                          mode "resize"
 #bindsym $mod+Shift+b mode "$mode_brightness"
 
 # cycling through workspaces
-bindsym $mod+y                                          border pixel 1
+bindsym $mod+y                                          border pixel 5
 bindsym $mod+u                                          border normal 1
 bindsym $mod+i                                          border none
 
-for_window [class="^.*"] border normal 1
+# Color scheme (Gruvbox dark)
+set $color_normal_white                                 #a8a8a8
+set $color_bright_white                                 #ffffff
+set $color_normal_gray                                  #121212
+set $color_bright_gray                                  #282828
+set $color_bright_yellow                                #d79921
+set $color_normal_black                                 #282828
+set $color_unused                                       #ff0000
+set $color_focused_border                               #222222
+set $color_statusbar_text                               #bbbbbb
+
+#set $color_normal_white                                 #a89984
+#set $color_normal_white                                 #a8a8a8
+#set $color_bright_white                                 #ebdbb2
+#set $color_normal_gray                                  #222222
+#set $color_bright_gray                                  #3c3836
+#set $color_bright_yellow                                #d79921
+#set $color_normal_black                                 #282828
+#set $color_unused                                       #ff0000
+#set $color_focused_border                               #215534
 
 # workspace bar
 bar {
@@ -190,26 +210,15 @@ bar {
                 statusline                              $color_bright_white
 
                 # Type                                  border                 background              font
-                focused_workspace                       $color_bright_gray     $color_bright_gray      $color_bright_white
-                active_workspace                        $color_unused          $color_unused           $color_unused
-                inactive_workspace                      $color_normal_gray     $color_normal_gray      $color_normal_white
-                urgent_workspace                        $color_bright_yellow   $color_bright_yellow    $color_normal_black
+                focused_workspace                       $color_bright_gray     $color_bright_gray      $color_statusbar_text
+                active_workspace                        $color_unused          $color_unused           $color_statusbar_text
+                inactive_workspace                      $color_normal_gray     $color_normal_gray      $color_statusbar_text
+                urgent_workspace                        $color_bright_yellow   $color_bright_yellow    $color_statusbar_text
         }
 }
 
-# Color scheme (Gruvbox dark)
-set $color_normal_white                                 #a89984
-set $color_normal_white                                 #a8a8a8
-set $color_bright_white                                 #ebdbb2
-set $color_normal_gray                                  #222222
-set $color_bright_gray                                  #3c3836
-set $color_bright_yellow                                #d79921
-set $color_normal_black                                 #282828
-set $color_unused                                       #ff0000
-set $color_focused_border                               #215534
-
 # Colors                                                border                 background             text                   indicator       child_border
-client.focused                                          $color_focused_border     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_white
+client.focused                                          $color_focused_border  $color_bright_gray     $color_bright_white    $color_unused   $color_normal_white
 client.focused_inactive                                 $color_bright_gray     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_black
 client.unfocused                                        $color_normal_gray     $color_normal_gray     $color_normal_white    $color_unused   $color_normal_black
 client.urgent                                           $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused   $color_unused
