@@ -11,11 +11,12 @@ exec --no-startup-id xrandr --output eDP-1 --scale 1x1 --dpi 276.05
 exec --no-startup-id blueman-manager
 exec --no-startup-id indicator-cpufreq
 exec --no-startup-id flameshot
+exec --no-startup-id nm-applet
 
 # screen lock
 set $LOCK_IMAGE $HOME/Téléchargements/Two-Factor_Image.png
 bindsym $mod+l exec i3lock -i $LOCK_IMAGE
-exec --no-startup-id "xautolock -time 2 -locker 'i3lock -i $LOCK_IMAGE' -notify 2 -notifier 'xset dpms force off' &"
+#exec --no-startup-id "xautolock -time 2 -locker 'i3lock -i $LOCK_IMAGE' -notify 2 -notifier 'xset dpms force off' &"
 
 # mouse wheel direction (natural)
 exec --no-startup-id xinput --set-prop 14 313 -27, -27
@@ -178,8 +179,8 @@ bindsym $mod+u                                          border normal 1
 bindsym $mod+i                                          border none
 
 # Color scheme (Gruvbox dark)
-set $color_normal_white                                 #a8a8a8
-set $color_bright_white                                 #ffffff
+set $color_normal_white                                 #444444
+set $color_bright_white                                 #ebebeb
 set $color_normal_gray                                  #121212
 set $color_bright_gray                                  #282828
 set $color_bright_yellow                                #d79921
@@ -218,9 +219,9 @@ bar {
 }
 
 # Colors                                                border                 background             text                   indicator       child_border
-client.focused                                          $color_focused_border  $color_bright_gray     $color_bright_white    $color_unused   $color_normal_white
+client.focused                                          $color_bright_gray     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_white
 client.focused_inactive                                 $color_bright_gray     $color_bright_gray     $color_bright_white    $color_unused   $color_normal_black
-client.unfocused                                        $color_normal_gray     $color_normal_gray     $color_normal_white    $color_unused   $color_normal_black
+client.unfocused                                        $color_bright_gray     $color_bright_gray     $color_normal_white    $color_unused   $color_normal_black
 client.urgent                                           $color_bright_yellow   $color_bright_yellow   $color_normal_black    $color_unused   $color_unused
 client.placeholder                                      $color_unused          $color_normal_black    $color_unused          $color_unused   $color_unused
 
