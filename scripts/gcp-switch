@@ -54,6 +54,10 @@ if [[ "d-idp-playground" == ${PROJECT_ID} ]]
 then
     REGION=europe-west1-b
 fi
+if [[ "kubernetes-web-demo" == ${CLUSTER_ID} ]]
+then
+    REGION=europe-west1
+fi
 
 if [[ -z ${CLUSTER_ID} ]]
 then
@@ -61,10 +65,17 @@ then
     gcloud container clusters list
 else
     echo "getting credentials for cluster ${CLUSTER_ID} on project ${PROJECT_ID}"
-    gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${REGION} --project ${PROJECT_ID}
+    gcloud container clusters get-credentials ${CLUSTER_ID} --zone ${REGION}
 fi
 
 echo ""
 echo "CURRENT PROJECT : $(gcloud config get-value project)"
+echo "CURRENT CLUSTER : ${CLUSTER_ID}"
+echo ""
+echo "gcloud configuration :"
+echo ""
 gcloud config configurations list
+echo ""
+echo "running pods :"
+echo ""
 kubectl get pods
