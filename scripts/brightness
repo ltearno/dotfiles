@@ -11,16 +11,16 @@ endColor='\e[0m'
 BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/brightness)
 MAX_BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 
-INC=1000
+INC=500
 
 if [[ $1 == "up" ]] ; then
-	#NEW=$(($BRIGHTNESS + $INC))
-	NEW=7500
+	NEW=$(($BRIGHTNESS + $INC))
+	#NEW=7500
 else
-	#NEW=$(($BRIGHTNESS - $INC))
-	NEW=500
+	NEW=$(($BRIGHTNESS - $INC))
+	#NEW=500
 fi
 
 echo -e "set brightness from $BRIGHTNESS to $NEW, max : $MAX_BRIGHTNESS"
-sudo sh -c "echo $NEW > /sys/class/backlight/intel_backlight/brightness"
+sh -c "echo $NEW > /sys/class/backlight/intel_backlight/brightness"
 
