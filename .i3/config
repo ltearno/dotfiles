@@ -74,8 +74,8 @@ bindsym $mod+a                                          focus parent
 bindsym $mod+z                                          focus child
 
 # scratchpad
-bindsym $mod+Shift+minus                                move scratchpad
-bindsym $mod+minus                                      scratchpad show
+#bindsym $mod+Shift+minus                                move scratchpad
+#bindsym $mod+minus                                      scratchpad show
 
 # control keys
 bindsym XF86AudioRaiseVolume                            exec amixer -q set Master 2dB+ unmute
