@@ -24,18 +24,18 @@ ENABLE_CORRECTION="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
+#  git
   docker
-  cp
   mvn
   kubectl
-  node
   npm
-  encode64
 )
 
+export PATH=$PATH:~/repos/persos/infrastructure-maison/scripts
+
 source /usr/share/google-cloud-sdk/completion.zsh.inc
-source <(kubectl completion zsh)
+#source <(kubectl completion zsh)
+source $HOME/.kubectl-completion-zsh.cache
 source /usr/share/autojump/autojump.zsh
 
 alias k=kubectl
@@ -49,7 +49,8 @@ alias paste='xclip -o -sel c'
 DEFAULT_USER=$USER
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir kubecontext vcs)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history load ram time)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history load ram time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 
 # For docker-compose, see https://docs.docker.com/compose/completion/#bash
 fpath=(~/.zsh/completion $fpath)
