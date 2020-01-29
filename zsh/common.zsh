@@ -2,6 +2,13 @@ export KUBE_EDITOR="nano"
 
 export PATH=$PATH:$HOME/repos/persos/dotfiles/scripts
 
+function goprepare() {
+    export GOPATH=$(pwd)
+    echo -e "\nswitched to GOPATH ${GOPATH}\n"
+    go env
+    echo
+}
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -48,7 +55,7 @@ alias paste='xclip -o -sel c'
 
 DEFAULT_USER=$USER
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir kubecontext vcs)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history load ram time)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 

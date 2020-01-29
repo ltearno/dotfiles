@@ -1,3 +1,8 @@
 #!/bin/bash
 
-export GOPATH=$(pwd)
+function goprepare() {
+    export GOPATH=$(pwd)
+    echo -e "\nswitched to GOPATH ${GOPATH}\n"
+    go env
+    echo
+}
